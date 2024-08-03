@@ -1,13 +1,11 @@
 import time
 import math
 
-
 def brute_force(coef, n, x):
     sum = 0.0
     for i in range(n + 1):
         sum += coef[i] * math.pow(x, i)
     return sum
-
 
 def horners_rule(coef, n, x):
     result = coef[n]
@@ -15,25 +13,28 @@ def horners_rule(coef, n, x):
         result = result * x + coef[i]
     return result
 
-
+# Input the degree of the polynomial
 n = int(input("Enter the degree of the polynomial: "))
-coef = [0] * (n + 1)
-print("Enter the coefficients from highest degree to lowest:")
-for i in range(n, -1, -1):
-    coef[i] = int(input())
 
+# Input the coefficients of the polynomial from highest degree to lowest
+coef = []
+print("Enter the coefficients from highest degree to lowest:")
+for i in range(n + 1):
+    coef.append(int(input()))
+
+# Input the value of x
 x = float(input("Enter the value of x: "))
 
-
+# Calculate and time the brute force method
 start = time.time()
 brute_force_result = brute_force(coef, n, x)
 end = time.time()
-time_used = end - start
-print(f"Brute force result: {brute_force_result:.2f}, time used: {time_used:.6f} seconds")
+time_used_brute_force = end - start
+print(f"Brute force result: {brute_force_result:.2f}, time used: {time_used_brute_force:.6f} seconds")
 
-
+# Calculate and time Horner's rule method
 start = time.time()
 horners_rule_result = horners_rule(coef, n, x)
 end = time.time()
-time_used = end - start
-print(f"Horner's rule result: {horners_rule_result:.2f}, time used: {time_used:.6f} seconds")
+time_used_horners_rule = end - start
+print(f"Horner's rule result: {horners_rule_result:.2f}, time used: {time_used_horners_rule:.6f} seconds")
